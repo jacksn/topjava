@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * GKislin
@@ -29,24 +30,20 @@ public class UserMealsUtil {
     }
 
     public static List<UserMealWithExceed> getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        Map<LocalDate, Integer> caloriesByDays = new HashMap<>();
-        for (UserMeal meal : mealList) {
-            caloriesByDays.merge(
-                    meal.getDateTime().toLocalDate(),
-                    meal.getCalories(),
-                    Integer::sum);
-        }
+        Map<LocalDate, Integer> caloriesByDays = mealList.stream()
+                .collect(Collectors.groupingBy(
+                        userMeal -> userMeal.getDateTime().toLocalDate(),
+                        Collectors.summingInt(UserMeal::getCalories)
+                        )
+                );
 
-        List<UserMealWithExceed> result = new ArrayList<>();
-        for (UserMeal meal : mealList) {
-            if (TimeUtil.isBetween(meal.getDateTime().toLocalTime(), startTime, endTime)) {
-                UserMealWithExceed exceededMeal = new UserMealWithExceed(meal.getDateTime(),
-                        meal.getDescription(),
-                        meal.getCalories(),
-                        caloriesByDays.get(meal.getDateTime().toLocalDate()) > caloriesPerDay);
-                result.add(exceededMeal);
-            }
-        }
-        return result;
+        return mealList.stream()
+                .filter(userMeal -> TimeUtil.isBetween(userMeal.getDateTime().toLocalTime(), startTime, endTime))
+                .map(userMeal -> new UserMealWithExceed(
+                        userMeal.getDateTime(),
+                        userMeal.getDescription(),
+                        userMeal.getCalories(),
+                        caloriesByDays.get(userMeal.getDateTime().toLocalDate()) > caloriesPerDay))
+                .collect(Collectors.toList());
     }
 }
