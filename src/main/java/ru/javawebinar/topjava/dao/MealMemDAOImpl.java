@@ -2,9 +2,8 @@ package ru.javawebinar.topjava.dao;
 
 import org.slf4j.Logger;
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.util.MealsUtil;
 
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -16,21 +15,16 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 public class MealMemDAOImpl implements MealDAO {
     private Map<Integer, Meal> meals = new ConcurrentHashMap<>();
-    private static AtomicInteger lastid = new AtomicInteger(0);
+    private static AtomicInteger lastId = new AtomicInteger(0);
     private static final Logger LOG = getLogger(MealMemDAOImpl.class);
 
-    public MealMemDAOImpl() {
-        add(new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500));
-        add(new Meal(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000));
-        add(new Meal(LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500));
-        add(new Meal(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000));
-        add(new Meal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500));
-        add(new Meal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510));
+    {
+        MealsUtil.MEALS.forEach(this::add);
     }
 
     @Override
     public int add(Meal meal) {
-        int id = lastid.getAndIncrement();
+        int id = lastId.getAndIncrement();
         meal.setId(id);
         update(meal);
         return id;
@@ -52,8 +46,7 @@ public class MealMemDAOImpl implements MealDAO {
         Meal meal = meals.remove(id);
         if (meal == null) {
             LOG.debug("Remove: error removing meal with id=" + id + ". Not found in database.");
-        }
-        else {
+        } else {
             LOG.debug("Remove: successfully removed: " + meal);
         }
     }
@@ -68,10 +61,5 @@ public class MealMemDAOImpl implements MealDAO {
     @Override
     public Meal get(int id) {
         return meals.get(id);
-    }
-
-    @Override
-    public int getCount() {
-        return meals.size();
     }
 }

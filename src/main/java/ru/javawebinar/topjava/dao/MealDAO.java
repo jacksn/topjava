@@ -10,5 +10,4 @@ public interface MealDAO {
     void remove(int id);
     List<Meal> getAll();
     Meal get(int id);
-    int getCount();
 }
