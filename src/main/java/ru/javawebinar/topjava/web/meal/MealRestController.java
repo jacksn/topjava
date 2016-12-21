@@ -37,7 +37,7 @@ public class MealRestController {
     public Meal create(Meal meal) {
         meal.setId(null);
         LOG.info("Create " + meal);
-        return service.save(meal);
+        return service.save(AuthorizedUser.id(), meal);
     }
 
     public void delete(int id) {
@@ -46,7 +46,7 @@ public class MealRestController {
     }
 
     public void update(Meal meal) {
-        service.save(meal);
+        service.save(AuthorizedUser.id(), meal);
     }
 
 }

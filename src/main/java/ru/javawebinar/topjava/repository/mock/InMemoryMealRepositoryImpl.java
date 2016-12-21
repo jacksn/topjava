@@ -8,7 +8,7 @@ import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.MealsUtil;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,13 +22,18 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     private AtomicInteger counter = new AtomicInteger(0);
 
     {
-        MealsUtil.MEALS.forEach(this::save);
+        MealsUtil.MEALS.forEach((meal) -> save(meal.getUserId(), meal));
     }
 
     @Override
-    public Meal save(Meal meal) {
+    public Meal save(int userId, Meal meal) {
         if (meal.isNew()) {
             meal.setId(counter.incrementAndGet());
+        } else {
+            if (get(meal.getId(), userId) == null) {
+                LOG.warn("Unauthorised access to foreign meal by user with id=" + userId);
+                return null;
+            }
         }
         repository.put(meal.getId(), meal);
         LOG.info("save " + meal);
@@ -39,7 +44,7 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     public boolean delete(int id, int userId) {
         LOG.info("delete " + id);
         Meal meal = repository.get(id);
-        if (meal.getUserId().equals(userId)) {
+        if (meal != null && meal.getUserId().equals(userId)) {
             repository.remove(id);
             return true;
         } else {
@@ -59,16 +64,15 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
 
     @Override
     public List<Meal> getAll(int userId) {
-        return repository.values().stream()
-                .filter(meal -> meal.getUserId().equals(userId))
-                .collect(Collectors.toList());
+        return getAll(userId, LocalDate.MIN, LocalDate.MAX);
     }
 
     @Override
     public List<Meal> getAll(int userId, LocalDate from, LocalDate to) {
         return repository.values().stream()
                 .filter(meal -> meal.getUserId().equals(userId))
-                .filter(meal-> (meal.getDate().compareTo(from) >= 0 &&  meal.getDate().compareTo(to) <= 0))
+                .filter(meal -> (meal.getDate().compareTo(from) >= 0 && meal.getDate().compareTo(to) <= 0))
+                .sorted(Comparator.comparing(Meal::getDateTime).reversed())
                 .collect(Collectors.toList());
     }
 }

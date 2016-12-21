@@ -11,7 +11,7 @@ import java.util.List;
  * 06.03.2015.
  */
 public interface MealRepository {
-    Meal save(Meal Meal);
+    Meal save(int userId, Meal Meal);
 
     // false if not found
     boolean delete(int id, int userId);

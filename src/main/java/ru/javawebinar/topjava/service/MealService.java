@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface MealService {
 
-    Meal save(Meal meal);
+    Meal save(int userId, Meal meal);
 
     void delete(int id, int userId) throws NotFoundException;
 

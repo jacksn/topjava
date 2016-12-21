@@ -6,6 +6,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.util.DateTimeUtil;
 import ru.javawebinar.topjava.util.MealsUtil;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 import ru.javawebinar.topjava.web.meal.MealRestController;
@@ -62,29 +63,11 @@ public class MealServlet extends HttpServlet {
             String timeFromS = request.getParameter("timeFrom");
             String timeToS = request.getParameter("timeTo");
 
-            if (dateFromS == null || dateFromS.isEmpty()) {
-                AuthorizedUser.setDateFrom(LocalDate.MIN);
-            } else {
-                AuthorizedUser.setDateFrom(LocalDate.parse(dateFromS, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            }
+            AuthorizedUser.setDateFrom(DateTimeUtil.processFilterDate(dateFromS, LocalDate.MIN));
+            AuthorizedUser.setDateTo(DateTimeUtil.processFilterDate(dateToS, LocalDate.MAX));
+            AuthorizedUser.setTimeFrom(DateTimeUtil.processFilterTime(timeFromS, LocalTime.MIN));
+            AuthorizedUser.setTimeTo(DateTimeUtil.processFilterTime(timeToS, LocalTime.MAX));
 
-            if (dateToS == null || dateToS.isEmpty()) {
-                AuthorizedUser.setDateTo(LocalDate.MAX);
-            } else {
-                AuthorizedUser.setDateTo(LocalDate.parse(dateToS, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            }
-
-            if (timeFromS == null || timeFromS.isEmpty()) {
-                AuthorizedUser.setTimeFrom(LocalTime.MIN);
-            } else {
-                AuthorizedUser.setTimeFrom(LocalTime.parse(timeFromS));
-            }
-
-            if (timeToS == null || timeToS.isEmpty()) {
-                AuthorizedUser.setTimeTo(LocalTime.MAX);
-            } else {
-                AuthorizedUser.setTimeTo(LocalTime.parse(timeToS));
-            }
         } else {
             Meal meal = new Meal(id.isEmpty() ? null : Integer.valueOf(id),
                     AuthorizedUser.id(), LocalDateTime.parse(request.getParameter("dateTime")),

@@ -24,8 +24,8 @@ public class MealServiceImpl implements MealService {
     private MealRepository repository;
 
     @Override
-    public Meal save(Meal meal) {
-        return repository.save(meal);
+    public Meal save(int userId, Meal meal) {
+        return repository.save(userId, meal);
     }
 
     @Override
@@ -40,9 +40,6 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public List<Meal> getAll(int userId, LocalDate dateFrom, LocalDate dateTo) {
-        return repository.getAll(userId, dateFrom, dateTo)
-                .stream()
-                .sorted(Comparator.comparing(Meal::getDateTime).reversed())
-                .collect(Collectors.toList());
+        return repository.getAll(userId, dateFrom, dateTo);
     }
 }
