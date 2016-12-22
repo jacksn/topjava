@@ -14,6 +14,7 @@ import static java.time.LocalDate.MIN;
 public class DateTimeUtil {
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    // TODO Replace with checkDateTimeInRange(Comparable<T> dateTime)
     public static boolean isBetween(LocalTime lt, LocalTime startTime, LocalTime endTime) {
         return lt.compareTo(startTime) >= 0 && lt.compareTo(endTime) <= 0;
     }
