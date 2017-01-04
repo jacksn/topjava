@@ -81,14 +81,6 @@ public class MealServiceTest {
         MATCHER.assertCollectionEquals(expected, actual);
     }
 
-    @Test(expected = AssertionError.class)
-    public void testGetBetweenDatesWithWrongUserId() throws Exception {
-        Collection<Meal> expected = Arrays.asList(userMeal3, userMeal2, userMeal1);
-        Collection<Meal> actual = service.getBetweenDates(LocalDate.of(2015, Month.MAY, 30),
-                LocalDate.of(2015, Month.MAY, 30), UserTestData.ADMIN_ID);
-        MATCHER.assertCollectionEquals(expected, actual);
-    }
-
     @Test(expected = NotFoundException.class)
     public void testGetWithWrongUserId() throws Exception {
         service.get(userMeal1.getId(), UserTestData.ADMIN_ID);
