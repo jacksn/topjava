@@ -162,7 +162,7 @@
 
     <profiles>
         <profile>
-            <id>hsqldb</id>
+            <id>db-hsqldb</id>
             <dependencies>
                 <dependency>
                     <groupId>org.hsqldb</groupId>
@@ -172,7 +172,7 @@
             </dependencies>
         </profile>
         <profile>
-            <id>postgres</id>
+            <id>db-postgres</id>
             <dependencies>
                 <dependency>
                     <groupId>org.postgresql</groupId>

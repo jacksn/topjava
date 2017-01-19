@@ -5,12 +5,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import ru.javawebinar.topjava.Profiles;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
@@ -21,23 +19,16 @@ import java.util.Collections;
 
 import static ru.javawebinar.topjava.UserTestData.*;
 
-@ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml"
-})
-@RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-@ActiveProfiles(Profiles.ACTIVE_DB)
-public class UserServiceTest {
+public abstract class AbstractUserServiceTest extends AbstractServiceTest {
 
     @Autowired
-    private UserService service;
+    protected UserService service;
 
     @Before
     public void setUp() throws Exception {
         service.evictCache();
     }
-        
+
     @Test
     public void testSave() throws Exception {
         User newUser = new User(null, "New", "new@gmail.com", "newPass", 1555, false, Collections.singleton(Role.ROLE_USER));
@@ -46,19 +37,15 @@ public class UserServiceTest {
         MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, newUser, USER), service.getAll());
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testDuplicateMailSave() throws Exception {
-        service.save(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.ROLE_USER));
-    }
-
     @Test
     public void testDelete() throws Exception {
         service.delete(USER_ID);
         MATCHER.assertCollectionEquals(Collections.singletonList(ADMIN), service.getAll());
     }
 
-    @Test(expected = NotFoundException.class)
-    public void testNotFoundDelete() throws Exception {
+    @Test
+    public void testDeleteNotFound() throws Exception {
+        thrown.expect(NotFoundException.class);
         service.delete(1);
     }
 
@@ -68,9 +55,16 @@ public class UserServiceTest {
         MATCHER.assertEquals(USER, user);
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test
     public void testGetNotFound() throws Exception {
+        thrown.expect(NotFoundException.class);
         service.get(1);
+    }
+
+    @Test
+    public void testDuplicateMailSave() throws Exception {
+        thrown.expect(DataAccessException.class);
+        service.save(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.ROLE_USER));
     }
 
     @Test
