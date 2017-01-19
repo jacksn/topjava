@@ -6,7 +6,7 @@ import org.springframework.test.context.ActiveProfiles;
 import ru.javawebinar.topjava.Profiles;
 import ru.javawebinar.topjava.model.Meal;
 
-import static ru.javawebinar.topjava.MealTestData.MEAL1_ID;
+import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.UserTestData.MATCHER;
 import static ru.javawebinar.topjava.UserTestData.USER;
 
@@ -17,6 +17,7 @@ public class MealServiceDataJPATest extends AbstractMealServiceTest {
     @Test
     public void testGetMealWithUser() throws Exception {
         Meal meal = service.getWithUser(MEAL1_ID);
+        ru.javawebinar.topjava.MealTestData.MATCHER.assertEquals(MEAL1, meal);
         MATCHER.assertEquals(meal.getUser(), USER);
     }
 }

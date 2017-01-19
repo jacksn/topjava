@@ -16,9 +16,10 @@
         <jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>
     </jdbc:initialize-database>
 
-    <tx:annotation-driven/>
 
     <beans profile="repository-jpa, repository-datajpa">
+        <tx:annotation-driven/>
+
         <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
               p:dataSource-ref="dataSource"
               p:packagesToScan="ru.javawebinar.**.model">
@@ -38,6 +39,7 @@
                       p:showSql="${jpa.showSql}">
                 </bean>
             </property>
+
         </bean>
 
         <!-- Transaction manager for a single JPA EntityManagerFactory (alternative to JTA) -->
