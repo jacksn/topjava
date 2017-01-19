@@ -8,13 +8,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,11 +27,9 @@ public abstract class AbstractJdbcMealRepositoryImpl implements MealRepository {
 
     @Autowired
     protected JdbcTemplate jdbcTemplate;
-
+    protected SimpleJdbcInsert insertMeal;
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
-    protected SimpleJdbcInsert insertMeal;
 
     @Autowired
     public AbstractJdbcMealRepositoryImpl(DataSource dataSource) {
