@@ -29,13 +29,13 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
         User newUser = new User(null, "New", "new@gmail.com", "newPass", 1555, false, Collections.singleton(Role.ROLE_USER));
         User created = service.save(newUser);
         newUser.setId(created.getId());
-        MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, newUser, USER), service.getAll());
+        MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, newUser, USER, USER_NO_MEALS), service.getAll());
     }
 
     @Test
     public void testDelete() throws Exception {
         service.delete(USER_ID);
-        MATCHER.assertCollectionEquals(Collections.singletonList(ADMIN), service.getAll());
+        MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, USER_NO_MEALS), service.getAll());
     }
 
     @Test
@@ -71,7 +71,7 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     @Test
     public void testGetAll() throws Exception {
         Collection<User> all = service.getAll();
-        MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, USER), all);
+        MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, USER, USER_NO_MEALS), all);
     }
 
     @Test

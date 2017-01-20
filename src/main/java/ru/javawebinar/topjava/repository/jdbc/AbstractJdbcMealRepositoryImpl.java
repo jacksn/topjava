@@ -91,4 +91,8 @@ public abstract class AbstractJdbcMealRepositoryImpl implements MealRepository {
                 .addValue("date_time", Timestamp.valueOf(meal.getDateTime()))
                 .addValue("user_id", userId);
     }
+
+//    protected <T> T getDBDateTime(LocalDateTime dateTime) {
+//        if (T. )
+//    }
 }
