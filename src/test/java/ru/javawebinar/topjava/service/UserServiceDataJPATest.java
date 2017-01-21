@@ -6,8 +6,8 @@ import ru.javawebinar.topjava.Profiles;
 import ru.javawebinar.topjava.model.User;
 
 import java.util.Arrays;
-import java.util.Collections;
 
+import static org.junit.Assert.assertEquals;
 import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.UserTestData.*;
 
@@ -27,8 +27,6 @@ public class UserServiceDataJPATest extends AbstractUserServiceTest {
     public void testGetUserWithNoMeals() throws Exception {
         User user = service.getWithMeals(USER_NO_MEALS_ID);
         ru.javawebinar.topjava.UserTestData.MATCHER.assertEquals(USER_NO_MEALS, user);
-        ru.javawebinar.topjava.MealTestData.MATCHER.assertCollectionEquals(
-                Collections.emptyList(),
-                user.getMeals());
+        assertEquals(0, user.getMeals().size());
     }
 }
