@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 
@@ -24,6 +25,8 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
     private static final BeanPropertyRowMapper<User> ROW_MAPPER = BeanPropertyRowMapper.newInstance(User.class);
 
+    private DataSource dataSource;
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -39,6 +42,11 @@ public class JdbcUserRepositoryImpl implements UserRepository {
                 .usingGeneratedKeyColumns("id");
     }
 
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    @Transactional
     @Override
     public User save(User user) {
         MapSqlParameterSource map = new MapSqlParameterSource()
@@ -61,6 +69,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
         return user;
     }
 
+    @Transactional
     @Override
     public boolean delete(int id) {
         return jdbcTemplate.update("DELETE FROM users WHERE id=?", id) != 0;
