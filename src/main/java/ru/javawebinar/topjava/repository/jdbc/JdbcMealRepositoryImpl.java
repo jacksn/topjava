@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.Profiles;
@@ -26,14 +25,10 @@ import java.util.List;
  * Date: 26.08.2014
  */
 
+@Transactional(readOnly = true)
 public abstract class JdbcMealRepositoryImpl<T> implements MealRepository {
 
     private static final RowMapper<Meal> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Meal.class);
-
-    private DataSource dataSource;
-
-    @Autowired
-    private DataSourceTransactionManager transactionManager;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -46,7 +41,7 @@ public abstract class JdbcMealRepositoryImpl<T> implements MealRepository {
     protected abstract T toDbDateTime(LocalDateTime ldt);
 
     @Autowired
-    private void setDataSource(DataSource dataSource) {
+    private void setInsertMeal(DataSource dataSource) {
         this.insertMeal = new SimpleJdbcInsert(dataSource)
                 .withTableName("meals")
                 .usingGeneratedKeyColumns("id");

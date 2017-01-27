@@ -19,8 +19,7 @@
     </h2>
     <hr>
     <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.Meal" scope="request"/>
-    <c:url value="/meals/save" var="mealsUrl"/>
-    <form method="post" action="${mealsUrl}">
+    <form method="post" action="meals/save">
         <input type="hidden" name="id" value="${meal.id}">
         <dl>
             <dt><fmt:message key="meals.date"/></dt>

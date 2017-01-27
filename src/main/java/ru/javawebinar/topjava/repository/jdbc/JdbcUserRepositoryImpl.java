@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 @Repository
+@Transactional(readOnly = true)
 public class JdbcUserRepositoryImpl implements UserRepository {
 
     private static final ResultSetExtractor<List<User>> USER_RESULT_SET_EXTRACTOR = rs -> {
@@ -102,8 +103,12 @@ public class JdbcUserRepositoryImpl implements UserRepository {
                 rolesToDelete.removeAll(newRoles);
                 List<Role> rolesToInsert = new ArrayList<>(newRoles);
                 rolesToInsert.removeAll(oldRoles);
-                updateRoles(INSERT_ROLES, id, rolesToInsert);
-                updateRoles(DELETE_ROLES, id, rolesToDelete);
+                if (rolesToInsert.size() > 0) {
+                    updateRoles(INSERT_ROLES, id, rolesToInsert);
+                }
+                if (rolesToDelete.size() > 0) {
+                    updateRoles(DELETE_ROLES, id, rolesToDelete);
+                }
             }
         }
         return user;
@@ -151,7 +156,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
     @Override
     public List<User> getAll() {
         return jdbcTemplate.query(
-                "SELECT * FROM users LEFT JOIN user_roles ON users.id = user_roles.user_id ORDER BY name, email",
+                "SELECT * FROM users LEFT JOIN user_roles ON users.id = user_roles.user_id",
                 USER_RESULT_SET_EXTRACTOR);
     }
 
