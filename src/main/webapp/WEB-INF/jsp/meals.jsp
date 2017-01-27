@@ -9,7 +9,7 @@
 
 <section>
     <h3><fmt:message key="meals.title"/></h3>
-    <form method="post" action="meals?action=filter">
+    <form method="post" action="meals">
         <dl>
             <dt><fmt:message key="meals.fromdate"/>:</dt>
             <dd><input type="date" name="startDate" value="${param.startDate}"></dd>

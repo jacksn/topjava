@@ -5,7 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.util.DateTimeUtil;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Controller
 @RequestMapping(value = "/meals")
@@ -14,6 +19,21 @@ public class MealUIController extends AbstractMealController {
     @RequestMapping(method = RequestMethod.GET)
     public String meals(Model model) {
         model.addAttribute("meals", super.getAll());
+        return "meals";
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String meals(@RequestParam(value = "startDate") String startDateString,
+                        @RequestParam(value = "endDate") String endDateString,
+                        @RequestParam(value = "startTime") String startTimeString,
+                        @RequestParam(value = "endTime") String endTimeString,
+                        Model model) {
+        LocalDate startDate = DateTimeUtil.parseLocalDate(startDateString);
+        LocalDate endDate = DateTimeUtil.parseLocalDate(endDateString);
+        LocalTime startTime = DateTimeUtil.parseLocalTime(startTimeString);
+        LocalTime endTime = DateTimeUtil.parseLocalTime(endTimeString);
+
+        model.addAttribute("meals", super.getBetween(startDate, startTime, endDate, endTime));
         return "meals";
     }
 
