@@ -15,7 +15,7 @@
         <div class="shadow">
             <h3><spring:message code="meals.title"/></h3>
             <div class="view-box">
-                <form method="post" action="meals/filter">
+                <form method="post" id="filterForm">
                     <dl>
                         <dt><spring:message code="meals.startDate"/>:</dt>
                         <dd><input type="date" name="startDate" value="${param.startDate}"></dd>

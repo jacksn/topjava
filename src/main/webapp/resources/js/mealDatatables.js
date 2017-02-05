@@ -36,17 +36,10 @@ $(function () {
 });
 
 function getAjaxFilterURL() {
-    return 'ajax/profile/meals/filter'
-        + '?' + 'startDate=' + $("[name='startDate']").val()
-        + '&' + 'endDate=' + $("[name='endDate']").val()
-        + '&' + 'startTime=' + $("[name='startTime']").val()
-        + '&' + 'endTime=' + $("[name='endTime']").val();
+    return ajaxUrl + 'filter?' + $('#filterForm').serialize();
 }
 
 function clearFilter() {
-    $("[name='startDate']").val("");
-    $("[name='endDate']").val("");
-    $("[name='startTime']").val("");
-    $("[name='endTime']").val("");
+    $('#filterForm').trigger('reset');
     updateTable();
 }
