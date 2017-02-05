@@ -44,3 +44,15 @@ $(function () {
 function getAjaxFilterURL() {
     return ajaxUrl;
 }
+
+function updateUserEnabled(id) {
+    var enabled = $('#' + id).find('[name="enabled"]').prop('checked');
+    $.ajax({
+        type: "POST",
+        url: ajaxUrl + id,
+        data: "enabled=" + enabled,
+        success: function () {
+            successNoty('Saved');
+        }
+    });
+}

@@ -3,6 +3,10 @@ function makeEditable() {
         deleteRow($(this).closest("tr").attr("id"));
     });
 
+    $('[name="enabled"]').click(function () {
+        updateUserEnabled($(this).closest("tr").attr("id"));
+    });
+
     $('#detailsForm').submit(function () {
         save();
         return false;
