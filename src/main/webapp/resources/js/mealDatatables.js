@@ -34,3 +34,19 @@ $(function () {
     });
     makeEditable();
 });
+
+function getAjaxFilterURL() {
+    return 'ajax/profile/meals/filter'
+        + '?' + 'startDate=' + $("[name='startDate']").val()
+        + '&' + 'endDate=' + $("[name='endDate']").val()
+        + '&' + 'startTime=' + $("[name='startTime']").val()
+        + '&' + 'endTime=' + $("[name='endTime']").val();
+}
+
+function clearFilter() {
+    $("[name='startDate']").val("");
+    $("[name='endDate']").val("");
+    $("[name='startTime']").val("");
+    $("[name='endTime']").val("");
+    updateTable();
+}

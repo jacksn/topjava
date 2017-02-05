@@ -32,7 +32,12 @@
                         <dt><spring:message code="meals.endTime"/>:</dt>
                         <dd><input type="time" name="endTime" value="${param.endTime}"></dd>
                     </dl>
-                    <button class="btn btn-sm btn-info" type="button"><spring:message code="meals.filter"/></button>
+                    <button class="btn btn-sm btn-info" type="button" onclick="updateTable()">
+                        <spring:message code="meals.filter"/>
+                    </button>
+                    <button class="btn btn-sm btn-danger" type="button" onclick="clearFilter()">
+                        <spring:message code="meals.clear"/>
+                    </button>
                 </form>
                 <hr>
                 <a class="btn btn-sm btn-info" onclick="add()">
