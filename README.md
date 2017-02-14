@@ -17,6 +17,7 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 
 ## <a href="description.md">Описание и план проекта</a>
 ### <a href="http://topjava.herokuapp.com/" target=_blank>Демо разрабатываемого приложения</a>
+### [Изменения проекта (Release Notes)](ReleaseNotes.md)
 ### <a href="https://github.com/JavaOPs/topjava/wiki">Требования к участникам, Wiki</a>
 ### <a href="cv.md">Составление резюме, подготовка к интервью, поиск работы</a>
 
@@ -121,16 +122,18 @@ Optional
 #### HTML, JavaScript, CSS 
 - <a href="http://www.w3schools.com/default.asp">HTML, CSS, JAVASCRIPT, SQL, JQUERY, BOOTSTRAP</a>
 - <a href="https://www.youtube.com/watch?v=j0ycGQKqMT4">Введение в программирование на JavaScript</a>
+- <a href="http://anton.shevchuk.name/javascript/html-css-javascript-standarts/">Стандарты кодирования для HTML, CSS и JavaScript’a</a>
 - <a href="http://www.intuit.ru/studies/courses/1102/134/info">Основы работы с HTML/CSS/JavaScript</a>
 - <a href="http://itchief.ru/lessons/javascript/94-javascript-introduction">JavaScript - Основы</a>
+- <a href="http://learn.javascript.ru/first-steps">Основы JavaScript</a>
 - <a href="http://itchief.ru/lessons/bootstrap-3/19-introduction-to-twitter-bootstrap-3">Bootstrap 3 - Основы</a>
 - <a href="http://anton.shevchuk.name/jquery/">jQuery для начинающих</a>
 
 #### Java (базовые вещи)
 - <a href="http://www.intuit.ru/studies/courses/16/16/info">Интуит. Программирование на Java</a>
+- <a href="https://github.com/JavaOPs/masterjava#Первое-занятие-многопоточность">1й урок MasterJava: Многопоточность</a>
 - <a href="http://ggenikus.github.io/blog/2014/05/04/gc/">Основы Java garbage collection</a>
 - <a href="https://habrahabr.ru/post/134102/">Размер Java объектов</a>
-- <a href="http://www.javaspecialist.ru/p/blog-page.html">Блог о памяти, сборщике мусора, многопоточности и производительности в JAVA</a>
 - <a href="http://www.quizful.net/post/java-reflection-api">Введение в Java Reflection API</a>
 - <a href="https://habrahabr.ru/users/tarzan82/topics/">Структуры данных в картинках</a>
 - <a href="https://habrahabr.ru/company/luxoft/blog/157273/">Обзор java.util.concurrent.*</a>
