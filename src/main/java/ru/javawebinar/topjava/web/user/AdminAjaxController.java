@@ -44,7 +44,7 @@ public class AdminAjaxController extends AbstractUserController {
             return new ResponseEntity<>(sb.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
         }
         if (userTo.isNew()) {
-            super.create(UserUtil.createNewFromTo(userTo));
+            super.create(UserUtil.createFromTo(userTo));
         } else {
             super.update(userTo);
         }
