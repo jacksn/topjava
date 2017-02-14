@@ -18,6 +18,9 @@ function enable(chkbox, id) {
     });
 }
 
+function updateElementDisplay() {
+}
+
 // $(document).ready(function () {
 $(function () {
     datatableApi = $('#datatable').DataTable({

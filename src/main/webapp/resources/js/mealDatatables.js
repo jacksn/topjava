@@ -16,6 +16,12 @@ function updateTable() {
     });
 }
 
+function updateElementDisplay(key, value) {
+    if (key == "dateTime") {
+        $('#dateTime').data("DateTimePicker").date(value);
+    }
+}
+
 $(function () {
     datatableApi = $("#datatable").DataTable({
         "ajax": {
@@ -65,5 +71,36 @@ $(function () {
             }
         },
         "initComplete": makeEditable
+    });
+    $('#startDate').datetimepicker({
+        format: "YYYY-MM-DD",
+        showTodayButton: true,
+        showClear: true,
+        showClose: true
+    }).on("dp.change", function (endDate) {
+        $('#endDate').data("DateTimePicker").minDate(endDate.date);
+    });
+
+    $('#endDate').datetimepicker({
+        format: "YYYY-MM-DD",
+        useCurrent: false,
+        showTodayButton: true,
+        showClear: true,
+        showClose: true
+    }).on("dp.change", function (startDate) {
+        $('#startDate').data("DateTimePicker").maxDate(startDate.date);
+    });
+
+    $('#startTime').datetimepicker({
+        format: "hh:mm"
+    });
+    $('#endTime').datetimepicker({
+        format: "hh:mm"
+    });
+    $('#dateTime').datetimepicker({
+        format: "YYYY-MM-DD HH:mm",
+        showTodayButton: true,
+        showClear: true,
+        showClose: true
     });
 });

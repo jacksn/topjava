@@ -4,6 +4,14 @@
 <%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
+<script type="text/javascript"
+        src="webjars/moment/2.17.1/moment.js"
+        defer></script>
+<link rel="stylesheet"
+      href="webjars/eonasdan-bootstrap-datetimepicker/4.17.43/build/css/bootstrap-datetimepicker.min.css">
+<script type="text/javascript"
+        src="webjars/eonasdan-bootstrap-datetimepicker/4.17.43/src/js/bootstrap-datetimepicker.js"
+        defer></script>
 <body>
 <script type="text/javascript" src="resources/js/datatablesUtil.js" defer></script>
 <script type="text/javascript" src="resources/js/mealDatatables.js" defer></script>
@@ -17,50 +25,50 @@
             <div class="view-box">
                 <div class="row">
                     <div class="col-sm-7">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <form class="form-horizontal" id="filter">
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="startDate"><spring:message
-                                        code="meals.startDate"/>:</label>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="form-horizontal" id="filter">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="startDate"><spring:message
+                                                code="meals.startDate"/>:</label>
 
-                                <div class="col-sm-4">
-                                    <input class="form-control" type="date" name="startDate" id="startDate">
-                                </div>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" type="text" name="startDate" id="startDate">
+                                        </div>
 
-                                <label class="control-label col-sm-3" for="startTime"><spring:message
-                                        code="meals.startTime"/>:</label>
+                                        <label class="control-label col-sm-3" for="startTime"><spring:message
+                                                code="meals.startTime"/>:</label>
 
-                                <div class="col-sm-3">
-                                    <input class="form-control" type="time" name="startTime" id="startTime">
-                                </div>
+                                        <div class="col-sm-3">
+                                            <input class="form-control" type="text" name="startTime" id="startTime">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="endDate"><spring:message
+                                                code="meals.endDate"/>:</label>
+
+                                        <div class="col-sm-4">
+                                            <input class="form-control" type="text" name="endDate" id="endDate">
+                                        </div>
+
+                                        <label class="control-label col-sm-3" for="endTime"><spring:message
+                                                code="meals.endTime"/>:</label>
+
+                                        <div class="col-sm-3">
+                                            <input class="form-control" type="text" name="endTime" id="endTime">
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="endDate"><spring:message
-                                        code="meals.endDate"/>:</label>
-
-                                <div class="col-sm-4">
-                                    <input class="form-control" type="date" name="endDate" id="endDate">
-                                </div>
-
-                                <label class="control-label col-sm-3" for="endTime"><spring:message
-                                        code="meals.endTime"/>:</label>
-
-                                <div class="col-sm-3">
-                                    <input class="form-control" type="time" name="endTime" id="endTime">
-                                </div>
+                            <div class="panel-footer text-right">
+                                <a class="btn btn-danger" type="button" onclick="clearFilter()">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </a>
+                                <a class="btn btn-primary" type="button" onclick="updateTable()">
+                                    <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+                                </a>
                             </div>
-                        </form>
-                    </div>
-                    <div class="panel-footer text-right">
-                        <a class="btn btn-danger" type="button" onclick="clearFilter()">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </a>
-                        <a class="btn btn-primary" type="button" onclick="updateTable()">
-                            <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                </div>
+                        </div>
                     </div>
                 </div>
                 <a class="btn btn-info" onclick="add()">
@@ -92,17 +100,18 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="detailsForm">
-                    <input type="hidden" id="id" name="id">
+                    <input type="text" hidden="hidden" id="id" name="id">
 
                     <div class="form-group">
                         <label for="dateTime" class="control-label col-xs-3"><spring:message
                                 code="meals.dateTime"/></label>
 
                         <div class="col-xs-9">
-                            <input type="datetime-local" class="form-control" id="dateTime" name="dateTime"
+                            <input type="text" class="form-control" id="dateTime" name="dateTime"
                                    placeholder="<spring:message code="meals.dateTime"/>">
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="description" class="control-label col-xs-3"><spring:message
                                 code="meals.description"/></label>
@@ -112,6 +121,7 @@
                                    placeholder="<spring:message code="meals.description"/>">
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="calories" class="control-label col-xs-3"><spring:message
                                 code="meals.calories"/></label>
@@ -120,6 +130,7 @@
                             <input type="number" class="form-control" id="calories" name="calories" placeholder="1000">
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
                             <button class="btn btn-primary" type="button" onclick="save()">
@@ -133,12 +144,8 @@
     </div>
 </div>
 <script type="text/javascript">
-    var i18n = [];
-
     var editTitle = '<spring:message code="meals.edit"/>';
-    <c:forEach var='key' items='<%=new String[]{"common.deleted","common.saved","common.enabled","common.disabled","common.failed"}%>'>
-    i18n['${key}'] = '<spring:message code="${key}"/>';
-    </c:forEach>
 </script>
+<jsp:include page="fragments/i18n.jsp"/>
 </body>
 </html>
