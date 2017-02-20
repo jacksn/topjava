@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="topjava" tagdir="/WEB-INF/tags" %>
@@ -13,7 +13,7 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h2>${userTo.name} <spring:message code="${register ? 'app.register' : 'app.profile'}"/></h2>
+            <h2><spring:message code="${register ? 'app.registration' : 'app.profile'}"/></h2>
 
             <div class="view-box">
                 <form:form modelAttribute="userTo" class="form-horizontal" method="post" action="${register ? 'register' : 'profile'}"

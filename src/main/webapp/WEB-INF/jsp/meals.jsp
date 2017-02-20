@@ -14,7 +14,7 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h3><spring:message code="meals.title"/></h3>
+            <h2><spring:message code="meals.title"/></h2>
 
             <div class="view-box">
                 <div class="row">
