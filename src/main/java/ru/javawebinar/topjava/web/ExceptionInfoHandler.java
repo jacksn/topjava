@@ -7,6 +7,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.util.exception.ErrorInfo;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
@@ -22,7 +23,7 @@ public class ExceptionInfoHandler {
     Logger LOG = LoggerFactory.getLogger(ExceptionInfoHandler.class);
 
 //  http://stackoverflow.com/a/22358422/548473
-    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY) // 422
     @ExceptionHandler(NotFoundException.class)
     @ResponseBody
     @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -38,8 +39,8 @@ public class ExceptionInfoHandler {
         return new ErrorInfo(req.getRequestURL(), "User with this e-mail already exists");
     }
 
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(BindException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST) // 400
+    @ExceptionHandler({BindException.class, MethodArgumentNotValidException.class})
     @ResponseBody
     @Order(Ordered.HIGHEST_PRECEDENCE + 2)
     public ErrorInfo badRequest(HttpServletRequest req, BindException e) {
@@ -53,7 +54,7 @@ public class ExceptionInfoHandler {
         return new ErrorInfo(req.getRequestURL(), sb.toString());
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) // 500
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public ErrorInfo handleError(HttpServletRequest req, Exception e) {
