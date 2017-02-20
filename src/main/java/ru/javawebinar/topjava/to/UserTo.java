@@ -15,18 +15,18 @@ public class UserTo implements HasId, Serializable {
 
     private Integer id;
 
-    @NotBlank
+    @NotBlank(message = "{common.field} \"{users.name}\" {common.field.notempty}")
     private String name;
 
     @Email
-    @NotBlank
+    @NotBlank(message = "{common.field} \"{users.email}\" {common.field.notempty}")
     private String email;
 
-    @Size(min = 5, max = 64, message = " must between 5 and 64 characters")
+    @Size(min = 5, max = 64, message = "{common.field} \"{users.password}\" {users.password.size}")
     private String password;
 
-    @Range(min = 10, max = 10000)
-    @NotNull
+    @Range(min = 10, max = 10000, message = "{common.field} \"{users.caloriesPerDay}\" {meals.calories.range}")
+    @NotNull(message = "{common.field} \"{users.caloriesPerDay}\" {common.field.notempty}")
     private Integer caloriesPerDay = UserUtil.DEFAULT_CALORIES_PER_DAY;
 
     public UserTo() {

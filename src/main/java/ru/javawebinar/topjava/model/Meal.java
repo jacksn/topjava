@@ -34,17 +34,17 @@ public class Meal extends BaseEntity {
     public static final String GET_BETWEEN = "Meal.getBetween";
 
     @Column(name = "date_time", nullable = false)
-    @NotNull
+    @NotNull(message = "{common.field} \"{meals.dateTime}\" {common.field.notempty}")
     @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
     private LocalDateTime dateTime;
 
     @Column(name = "description", nullable = false)
-    @NotBlank
+    @NotBlank(message = "{common.field} \"{meals.description}\"  {common.field.notempty}")
     private String description;
 
     @Column(name = "calories", nullable = false)
-    @Range(min = 10, max = 5000)
-    @NotNull
+    @Range(min = 10, max = 5000, message = "{common.field} \"{meals.calories}\" {meals.calories.range}")
+    @NotNull(message = "{common.field} \"{meals.calories}\" {common.field.notempty}")
     private Integer calories;
 
     @ManyToOne(fetch = FetchType.LAZY)

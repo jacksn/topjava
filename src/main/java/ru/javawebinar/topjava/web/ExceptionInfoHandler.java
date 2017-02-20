@@ -2,6 +2,9 @@ package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,7 +23,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 @ControllerAdvice(annotations = RestController.class)
 public class ExceptionInfoHandler {
-    Logger LOG = LoggerFactory.getLogger(ExceptionInfoHandler.class);
+    private Logger LOG = LoggerFactory.getLogger(ExceptionInfoHandler.class);
+
+    @Autowired
+    private MessageSource messageSource;
 
 //  http://stackoverflow.com/a/22358422/548473
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY) // 422
@@ -36,7 +42,8 @@ public class ExceptionInfoHandler {
     @ResponseBody
     @Order(Ordered.HIGHEST_PRECEDENCE + 1)
     public ErrorInfo conflict(HttpServletRequest req, DataIntegrityViolationException e) {
-        return new ErrorInfo(req.getRequestURL(), "User with this e-mail already exists");
+        return new ErrorInfo(req.getRequestURL(),
+                messageSource.getMessage("users.email.duplicate", null, LocaleContextHolder.getLocale()));
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST) // 400
@@ -46,8 +53,6 @@ public class ExceptionInfoHandler {
     public ErrorInfo badRequest(HttpServletRequest req, BindException e) {
         StringBuilder sb = new StringBuilder();
         e.getFieldErrors().forEach(error -> {
-            sb.append(error.getField());
-            sb.append(' ');
             sb.append(error.getDefaultMessage());
             sb.append("<br/>");
         });
