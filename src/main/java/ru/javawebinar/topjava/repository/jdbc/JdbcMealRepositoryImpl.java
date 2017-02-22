@@ -41,7 +41,7 @@ public abstract class JdbcMealRepositoryImpl<T> implements MealRepository {
     protected abstract T toDbDateTime(LocalDateTime ldt);
 
     @Autowired
-    private void setDataSource(DataSource dataSource) {
+    protected void setDataSource(DataSource dataSource) {
         this.insertMeal = new SimpleJdbcInsert(dataSource)
                 .withTableName("meals")
                 .usingGeneratedKeyColumns("id");
