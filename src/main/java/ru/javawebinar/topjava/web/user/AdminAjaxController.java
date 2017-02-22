@@ -39,7 +39,10 @@ public class AdminAjaxController extends AbstractUserController {
         if (userTo.isNew()) {
             super.create(UserUtil.createNewFromTo(userTo));
         } else {
-            super.update(userTo);
+            int id = userTo.getId();
+            User user = super.get(id);
+            UserUtil.updateFromTo(user, userTo);
+            super.update(user, id);
         }
     }
 
