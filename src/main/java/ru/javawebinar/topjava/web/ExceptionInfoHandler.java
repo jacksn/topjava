@@ -2,9 +2,6 @@ package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -25,10 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ExceptionInfoHandler {
     private Logger LOG = LoggerFactory.getLogger(ExceptionInfoHandler.class);
 
-    @Autowired
-    private MessageSource messageSource;
-
-//  http://stackoverflow.com/a/22358422/548473
+    //  http://stackoverflow.com/a/22358422/548473
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY) // 422
     @ExceptionHandler(NotFoundException.class)
     @ResponseBody
@@ -42,8 +36,7 @@ public class ExceptionInfoHandler {
     @ResponseBody
     @Order(Ordered.HIGHEST_PRECEDENCE + 1)
     public ErrorInfo conflict(HttpServletRequest req, DataIntegrityViolationException e) {
-        return new ErrorInfo(req.getRequestURL(),
-                messageSource.getMessage("users.email.duplicate", null, LocaleContextHolder.getLocale()));
+        return logAndGetErrorInfo(req, e, false);
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST) // 400
@@ -66,12 +59,12 @@ public class ExceptionInfoHandler {
         return logAndGetErrorInfo(req, e, true);
     }
 
-    public ErrorInfo logAndGetErrorInfo(HttpServletRequest req, Exception e, boolean logException) {
+    private ErrorInfo logAndGetErrorInfo(HttpServletRequest req, Exception e, boolean logException) {
         if (logException) {
             LOG.error("Exception at request " + req.getRequestURL(), e);
         } else {
             LOG.warn("Exception at request " + req.getRequestURL() + ": " + e.toString());
         }
-        return new ErrorInfo(req.getRequestURL(), e);
+        return new ErrorInfo(req.getRequestURL(), e.getMessage());
     }
 }

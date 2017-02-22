@@ -3,6 +3,9 @@ package ru.javawebinar.topjava.web.meal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
@@ -27,6 +30,9 @@ public abstract class AbstractMealController {
     @Autowired
     private MealService service;
 
+    @Autowired
+    private MessageSource messageSource;
+
     public Meal get(int id) {
         int userId = AuthorizedUser.id();
         LOG.info("get meal {} for User {}", id, userId);
@@ -49,14 +55,26 @@ public abstract class AbstractMealController {
         checkIdConsistent(meal, id);
         int userId = AuthorizedUser.id();
         LOG.info("update {} for User {}", meal, userId);
-        service.update(meal, userId);
+        try {
+            service.update(meal, userId);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException(
+                    messageSource.getMessage("meals.datetime.duplicate", null,
+                            LocaleContextHolder.getLocale()));
+        }
     }
 
     public Meal create(Meal meal) {
         checkNew(meal);
         int userId = AuthorizedUser.id();
         LOG.info("create {} for User {}", meal, userId);
-        return service.save(meal, userId);
+        try {
+            return service.save(meal, userId);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException(
+                    messageSource.getMessage("meals.datetime.duplicate", null,
+                            LocaleContextHolder.getLocale()));
+        }
     }
 
     public List<MealWithExceed> getBetween(LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
