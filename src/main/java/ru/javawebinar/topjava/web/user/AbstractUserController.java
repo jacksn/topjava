@@ -56,8 +56,8 @@ public abstract class AbstractUserController {
     }
 
     public void update(User user, int id) {
-        checkIdConsistent(user, id);
         LOG.info("update " + user);
+        checkIdConsistent(user, id);
         try {
             service.update(user);
         } catch (DataIntegrityViolationException e) {

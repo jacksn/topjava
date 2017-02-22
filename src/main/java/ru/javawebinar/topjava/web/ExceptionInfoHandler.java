@@ -45,10 +45,7 @@ public class ExceptionInfoHandler {
     @Order(Ordered.HIGHEST_PRECEDENCE + 2)
     public ErrorInfo badRequest(HttpServletRequest req, BindException e) {
         StringBuilder sb = new StringBuilder();
-        e.getFieldErrors().forEach(error -> {
-            sb.append(error.getDefaultMessage());
-            sb.append("<br/>");
-        });
+        e.getFieldErrors().forEach(error -> sb.append(error.getDefaultMessage()).append("<br/>"));
         return new ErrorInfo(req.getRequestURL(), sb.toString());
     }
 
