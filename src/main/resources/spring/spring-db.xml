@@ -22,7 +22,7 @@
 
     <tx:annotation-driven/>
 
-    <beans profile="hsqldb">
+    <beans profile="db-hsqldb">
         <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
 
         <!--no pooling-->
@@ -34,7 +34,7 @@
               p:password="${database.password}"/>
     </beans>
 
-    <beans profile="postgres">
+    <beans profile="db-postgres">
         <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
 
         <bean id="dataSource"
@@ -50,7 +50,7 @@
         <context:property-placeholder location="classpath:db/tomcat.properties" system-properties-mode="OVERRIDE"/>
     </beans>
 
-    <beans profile="jdbc">
+    <beans profile="repo-jdbc">
         <context:component-scan base-package="ru.javawebinar.**.repository.jdbc"/>
         <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
             <constructor-arg ref="dataSource"/>
@@ -66,7 +66,7 @@
         </bean>
     </beans>
 
-    <beans profile="heroku">
+    <beans profile="db-heroku">
         <context:property-placeholder location="classpath:/db/heroku.properties" system-properties-mode="OVERRIDE"/>
 
         <bean class="java.net.URI" id="dbUrl">
@@ -90,7 +90,7 @@
               p:testWhileIdle="true"/>
     </beans>
 
-    <beans profile="jpa,datajpa">
+    <beans profile="repo-jpa, repo-datajpa">
         <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
               p:dataSource-ref="dataSource"
               p:packagesToScan="ru.javawebinar.**.model">
@@ -130,11 +130,11 @@
         <bean class="ru.javawebinar.topjava.repository.JpaUtil"/>
     </beans>
 
-    <beans profile="jpa">
+    <beans profile="repo-jpa">
         <context:component-scan base-package="ru.javawebinar.**.repository.jpa"/>
     </beans>
 
-    <beans profile="datajpa">
+    <beans profile="repo-datajpa">
         <context:component-scan base-package="ru.javawebinar.**.repository.datajpa"/>
         <jpa:repositories base-package="ru.javawebinar.**.repository.datajpa"/>
     </beans>

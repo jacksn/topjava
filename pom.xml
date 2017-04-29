@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <tomcat.version>8.5.5</tomcat.version>
+        <tomcat.version>8.5.14</tomcat.version>
         <spring.version>4.3.6.RELEASE</spring.version>
         <spring-data-jpa.version>1.11.0.RELEASE</spring-data-jpa.version>
         <spring-security.version>4.2.1.RELEASE</spring-security.version>
@@ -79,7 +79,7 @@
                         <containerId>tomcat8x</containerId>
                         <systemProperties>
                             <file.encoding>UTF-8</file.encoding>
-                            <spring.profiles.active>tomcat,datajpa</spring.profiles.active>
+                            <spring.profiles.active>tomcat,repo-datajpa</spring.profiles.active>
                         </systemProperties>
                         <dependencies>
                             <dependency>
