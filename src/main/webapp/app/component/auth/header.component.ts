@@ -10,7 +10,7 @@ import {I18Enum} from "../../model/i18n.enum";
 @Component({
   templateUrl: '../../../../templates/auth/header.html',
   selector: 'header-component',
-  styleUrls: ["../../../resources/css/i18n.css"]
+  styleUrls: ["../../../../resources/css/i18n.css"]
 })
 
 export class HeaderComponent implements OnInit {

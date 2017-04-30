@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../service/auth.service";
 
 @Component({
-    templateUrl: '../../../templates/auth/entry.html'
+    templateUrl: '../../../../templates/auth/entry.html'
 })
 export class EntryComponent implements OnInit{
 
