@@ -1,6 +1,6 @@
 import {RequestOptions, Headers} from "@angular/http";
 
-export const basePath: string = '/topjava-rs';
+export const basePath: string = '/topjava';
 export const loginPath: string = "/spring_security_check";
 export const mealPath: string = '/rest/profile/meals';
 export const profilePath: string = '/rest/profile';
