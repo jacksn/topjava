@@ -2,12 +2,9 @@ package ru.javawebinar.topjava.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.support.SessionStatus;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.to.UserTo;
@@ -30,7 +27,7 @@ public class RootController extends AbstractUserController {
     private CustomReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource;
 
     @PostMapping("/register")
-    public void saveRegister(@Valid UserTo userTo, BindingResult result, SessionStatus status, ModelMap model) {
+    public void saveRegister(@Valid UserTo userTo) {
         User user = UserUtil.createNewFromTo(userTo);
         checkNew(user);
         log.info("create " + user);
