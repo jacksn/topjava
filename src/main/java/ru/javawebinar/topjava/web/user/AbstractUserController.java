@@ -3,8 +3,6 @@ package ru.javawebinar.topjava.web.user;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.env.Environment;
 import ru.javawebinar.topjava.Profiles;
 import ru.javawebinar.topjava.model.BaseEntity;
@@ -16,17 +14,14 @@ import javax.validation.ValidationException;
 import java.util.Arrays;
 import java.util.List;
 
-import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkIdConsistent;
+import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
 
 /**
  * User: gkislin
  */
 public abstract class AbstractUserController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
-
-    @Autowired
-    private MessageSource messageSource;
 
     @Autowired
     private UserService service;
@@ -38,9 +33,9 @@ public abstract class AbstractUserController {
         systemUserForbiddenModification = Arrays.asList(environment.getActiveProfiles()).contains(Profiles.HEROKU);
     }
 
-    public void checkModificationAllowed(Integer id) {
+    private void checkModificationAllowed(Integer id) {
         if (systemUserForbiddenModification && id < BaseEntity.START_SEQ + 2) {
-            throw new ValidationException(messageSource.getMessage("user.modificationRestriction", null, LocaleContextHolder.getLocale()));
+            throw new ValidationException("Admin/User modification is not allowed. <br><br><a class=\"btn btn-primary btn-lg\" role=\"button\" href=\"register\">Register &raquo;</a> your own please.");
         }
     }
 
