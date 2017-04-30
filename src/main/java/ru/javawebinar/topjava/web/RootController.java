@@ -1,10 +1,10 @@
 package ru.javawebinar.topjava.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.to.UserTo;
@@ -17,7 +17,7 @@ import java.util.Properties;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
 
-@Controller
+@RestController
 public class RootController extends AbstractUserController {
 
     @Autowired
