@@ -3,7 +3,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {UserModel} from "../../model/user.model";
 
 @Component({
-    templateUrl: '../../../../templates/user/user-edit.html',
+  templateUrl: '../../../templates/user/user-edit.html',
     selector: 'user-edit'
 })
 export class UserEditComponent implements OnInit {

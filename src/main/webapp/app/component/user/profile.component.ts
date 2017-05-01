@@ -5,7 +5,7 @@ import {AuthService} from "../../service/auth.service";
 import {ProfileService} from "../../service/profile.service";
 
 @Component({
-    templateUrl: "../../../../templates/user/profile.html"
+  templateUrl: "../../../templates/user/profile.html"
 })
 export class ProfileComponent implements OnInit{
 

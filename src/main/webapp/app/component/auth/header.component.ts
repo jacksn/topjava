@@ -8,7 +8,7 @@ import {ExceptionService} from "../../service/exception.service";
 import {I18Enum} from "../../model/i18n.enum";
 
 @Component({
-  templateUrl: '../../../../templates/auth/header.html',
+  templateUrl: '../../../templates/auth/header.html',
   selector: 'header-component',
   styleUrls: ["../../../../resources/css/i18n.css"]
 })

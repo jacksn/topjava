@@ -6,7 +6,7 @@ import {ValidateUtil} from "../../util/validate.util";
 import {ExceptionService} from "../../service/exception.service";
 
 @Component({
-    templateUrl: "../../../../templates/user/profile.html"
+  templateUrl: "../../../templates/user/profile.html"
 })
 export class RegisterComponent implements OnInit {
 

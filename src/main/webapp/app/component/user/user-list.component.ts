@@ -7,7 +7,7 @@ import {I18nService} from "../../service/i18n.service";
 import {ExceptionService} from "../../service/exception.service";
 
 @Component({
-    templateUrl: "../../../../templates/user/user-list.html"
+  templateUrl: "../../../templates/user/user-list.html"
 })
 export class UserListComponent implements OnInit {
 

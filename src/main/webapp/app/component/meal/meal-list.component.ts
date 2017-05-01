@@ -6,7 +6,7 @@ import {UserMeal} from "../../model/meal.model";
 import {MealService} from "../../service/meal.service";
 
 @Component({
-  templateUrl: '../../../../templates/meal/meal-list.html'
+  templateUrl: '../../../templates/meal/meal-list.html'
 })
 export class MealListComponent implements OnInit {
 

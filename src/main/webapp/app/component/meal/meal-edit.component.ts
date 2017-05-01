@@ -4,7 +4,7 @@ import {UserMeal} from "../../model/meal.model";
 import {ValidateUtil} from "../../util/validate.util";
 
 @Component({
-  templateUrl: '../../../../templates/meal/meal-edit.html',
+  templateUrl: '../../../templates/meal/meal-edit.html',
   selector: 'edit-meal'
 })
 export class EditMealComponent implements OnInit {
