@@ -66,7 +66,6 @@ public class RootController extends AbstractUserController {
 
     @GetMapping("/register")
     public String register(ModelMap model) {
-        model.addAttribute("userTo", new UserTo());
         model.addAttribute("register", true);
         return "profile";
     }
