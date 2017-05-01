@@ -1,6 +1,6 @@
 import {RouterModule, Routes} from "@angular/router";
 import {ModuleWithProviders} from "@angular/core";
-import {EntryComponent} from "./component/auth/entry.component";
+import {LoginComponent} from "./component/auth/login.component";
 import {RegisterComponent} from "./component/user/register.component";
 import {MealListComponent} from "./component/meal/meal-list.component";
 import {AuthActivateGuard} from "./shared/auth.activate.guard";
@@ -14,7 +14,7 @@ const appRoutes: Routes = [
   },
   {
     path: "login",
-    component: EntryComponent,
+    component: LoginComponent,
   },
   {
     path: "register",

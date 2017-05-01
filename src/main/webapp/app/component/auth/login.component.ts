@@ -4,9 +4,9 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../service/auth.service";
 
 @Component({
-    templateUrl: '../../../../templates/auth/entry.html'
+  templateUrl: '../../../templates/auth/login.html'
 })
-export class EntryComponent implements OnInit{
+export class LoginComponent implements OnInit {
 
     private loginForm: FormGroup;
 

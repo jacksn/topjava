@@ -1,7 +1,7 @@
-import {APP_INITIALIZER, NgModule}      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {APP_INITIALIZER, NgModule} from "@angular/core";
+import {BrowserModule} from "@angular/platform-browser";
 
-import { AppComponent }  from './app.component';
+import {AppComponent} from "./app.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {CalendarModule, DataTableModule, GrowlModule} from "primeng/primeng";
@@ -9,7 +9,7 @@ import {DatePipe} from "@angular/common";
 import {HeaderComponent} from "./component/auth/header.component";
 import {routing} from "./app.routes";
 import {MealListComponent} from "./component/meal/meal-list.component";
-import {EntryComponent} from "./component/auth/entry.component";
+import {LoginComponent} from "./component/auth/login.component";
 import {EditMealComponent} from "./component/meal/meal-edit.component";
 import {ProfileComponent} from "./component/user/profile.component";
 import {RegisterComponent} from "./component/user/register.component";
@@ -27,16 +27,29 @@ import {ExceptionService} from "./service/exception.service";
 import {I18Enum} from "./model/i18n.enum";
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule, ReactiveFormsModule, HttpModule, routing, CalendarModule, DataTableModule, GrowlModule],
-  declarations: [ AppComponent , MealListComponent, EntryComponent,
-    EditMealComponent, HeaderComponent,
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule,
+    routing,
+    CalendarModule,
+    DataTableModule,
+    GrowlModule
+  ],
+  declarations: [
+    AppComponent,
+    MealListComponent,
+    LoginComponent,
+    EditMealComponent,
+    HeaderComponent,
     ProfileComponent,
     RegisterComponent,
     UserListComponent,
     UserEditComponent,
     I18nPipe
   ],
-  bootstrap:    [ AppComponent ],
+  bootstrap: [AppComponent],
   providers: [AuthService, AuthActivateGuard, MealService, UserService, ProfileService,
     I18nService, DateTimeTransformer, DatePipe, ExceptionService,
     {
@@ -49,7 +62,8 @@ import {I18Enum} from "./model/i18n.enum";
     }
   ]
 })
-export class AppModule { }
+export class AppModule {
+}
 
 export function initApp(i18nService: I18nService) {
   // Do initing of services that is required before app loads
