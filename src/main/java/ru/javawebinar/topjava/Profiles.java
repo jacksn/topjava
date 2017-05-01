@@ -2,13 +2,13 @@ package ru.javawebinar.topjava;
 
 public class Profiles {
     public static final String
-            POSTGRES = "postgres",
-            HSQLDB = "hsqldb",
-            HEROKU = "heroku",
+            POSTGRES = "db-postgres",
+            HSQLDB = "db-hsqldb",
+            HEROKU = "db-heroku",
 
-            JDBC = "jdbc",
-            JPA = "jpa",
-            DATAJPA = "datajpa";
+    JDBC = "repo-jdbc",
+            JPA = "repo-jpa",
+            DATAJPA = "repo-datajpa";
 
     public static final String DB_IMPLEMENTATION = DATAJPA;
 
