@@ -15,9 +15,10 @@
                             <sec:authorize access="hasRole('ROLE_ADMIN')">
                                 <a class="btn btn-info" href="users"><spring:message code="users.title"/></a>
                             </sec:authorize>
-                            <a class="btn btn-info" role="button" href="profile">${userTo.name} <spring:message code="app.profile"/></a>
+                            <a class="btn btn-info" role="button" href="profile"><spring:message
+                                    code="app.profile"/></a>
                             <button class="btn btn-primary" type="submit">
-                                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                                <spring:message code="app.logout"/>
                             </button>
                         </sec:authorize>
                     </form:form>
