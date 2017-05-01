@@ -51,6 +51,9 @@
                 <a class="btn btn-lg btn-success" href="register"><spring:message code="app.register"/></a>
             </div>
             <div class="col-md-8">
+                <a href="oauth2/github/authorize" role="button" class="btn btn-lg btn-info">
+                    <spring:message code="app.login.github"/>
+                </a>
                 <button type="submit" class="btn btn-lg btn-primary"
                         onclick="setCredentials('user@yandex.ru', 'password')">
                     <spring:message code="app.login.as"/> User
