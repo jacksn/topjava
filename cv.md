@@ -6,7 +6,6 @@
 
 ### Составление резюме:
 -  <a href="http://resumup.com/">Выбрать шаблон для резюме</a>
--  <a href="http://ain.ua/2015/01/14/558261">Идеальное резюме Junior’а</a>
 -  <a href="http://lifehacker.ru/2015/04/07/33-lajfhaka-dlya-rezyume/">Как продать свое резюме в 2 раза дороже</a>
 -  <a href="http://enjoy-job.ru/trudoustroistvo/kak-pravilno-sostavit-rezume/">Как правильно составить резюме</a>
 -  <a href="http://habrahabr.ru/post/184332/">Резюме программистов. Часть 1 (плохие)</a>
@@ -17,10 +16,10 @@
 ### <a href="http://javaops.ru/story.html">Наши истории (делимся опытом и успехом)</a>
 
 ### Тесты/задачи онлайн:
+- [Java Programming Test](https://tests4geeks.com/java)
 - <a href="http://www.javadeathmatch.com/">game: test Java skills</a>
 - <a href="https://codility.com/programmers/lessons">Codility lesson tests</a>
 - <a href="http://www.quizful.net/test">Quizful- тесты онлайн</a>
-- <a href="https://www.tracy.k12.ca.us/sites/clunetta/Java/practice/practice.htm">Multiple-Choice Questions in Java</a>
 - <a href="https://leetcode.com/">LeetCode Online Judge</a>
 - <a href="http://www.spoj.com/">Sphere online judge</a>
 - <a href="https://codility.com/programmers/lessons/">Codility programmers lessons</a>
@@ -80,4 +79,4 @@
 - <a href="https://www.linkedin.com/">LinkedIn</a>
 - <a href="http://djinni.co/">djinni.co (более актуально для Украины)</a>
 
-## <a href="http://javaops.ru/vacation/test.html">Тестовое собеседование, самые спрашиваемые темы</a>
+## <a href="http://javaops.ru/interview/test.html">Тестовое собеседование, самые спрашиваемые темы</a>
