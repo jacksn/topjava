@@ -63,8 +63,8 @@ public class AdminRestController extends AbstractUserController {
         return super.getByMail(email);
     }
 
-    @PostMapping(value = "/{id}")
-    public void enabled(@PathVariable("id") int id, @RequestParam("enabled") boolean enabled) {
+    @PatchMapping(value = "/{id}/{enabled}")
+    public void enabled(@PathVariable("id") int id, @PathVariable("enabled") boolean enabled) {
         super.enable(id, enabled);
     }
 
