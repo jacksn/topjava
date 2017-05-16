@@ -4,8 +4,7 @@ public class OAuth2Source {
 
     private String authorizeUrl;
     private String accessTokenUrl;
-    private String mailUrl;
-    private String loginUrl;
+    private String userInfoUrl;
     private String clientId;
     private String clientSecret;
     private String redirectUri;
@@ -27,20 +26,12 @@ public class OAuth2Source {
         this.accessTokenUrl = accessTokenUrl;
     }
 
-    public String getMailUrl() {
-        return mailUrl;
+    public String getUserInfoUrl() {
+        return userInfoUrl;
     }
 
-    public void setMailUrl(String mailUrl) {
-        this.mailUrl = mailUrl;
-    }
-
-    public String getLoginUrl() {
-        return loginUrl;
-    }
-
-    public void setLoginUrl(String loginUrl) {
-        this.loginUrl = loginUrl;
+    public void setUserInfoUrl(String userInfoURL) {
+        this.userInfoUrl = userInfoURL;
     }
 
     public String getClientId() {

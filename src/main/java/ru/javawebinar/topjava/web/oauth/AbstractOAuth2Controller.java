@@ -1,4 +1,4 @@
-package ru.javawebinar.topjava.web.oauth.github;
+package ru.javawebinar.topjava.web.oauth;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,51 +9,33 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
-import ru.javawebinar.topjava.to.GithubUserDetails;
 import ru.javawebinar.topjava.to.UserTo;
-import ru.javawebinar.topjava.util.exception.NotFoundException;
-import ru.javawebinar.topjava.web.oauth.OAuth2Source;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import static org.springframework.web.util.UriComponentsBuilder.fromHttpUrl;
 
-@Controller
-@RequestMapping("/oauth2/github")
-public class OAuth2Controller {
-    @Autowired
-    private RestTemplate template;
+public abstract class AbstractOAuth2Controller {
 
+    @Autowired
+    protected RestTemplate template;
     @Autowired
     private UserDetailsService service;
-
-    @Autowired
-    private OAuth2Source source;
-
-    @GetMapping("/authorize")
-    public String authorize() {
-        return "redirect:" + source.getAuthorizeUrl()
-                + "?client_id=" + source.getClientId()
-                + "&client_secret=" + source.getClientSecret()
-//                + "&redirect_uri=" + source.getRedirectUri()
-                + "&state=" + source.getCode();
-    }
 
     @RequestMapping("/callback")
     public ModelAndView authenticate(@RequestParam String code, @RequestParam String state, RedirectAttributes attr, HttpServletRequest request) {
         if (state.equals("topjava_csrf_token_auth")) {
-            GithubUserDetails githubUserDetails = getGithubUserDetails(getAccessToken(code));
+            String accessToken = getAccessToken(code);
+            UserTo user = getUserDetails(accessToken);
             try {
-                UserDetails userDetails = service.loadUserByUsername(githubUserDetails.getEmail());
+                UserDetails userDetails = service.loadUserByUsername(user.getEmail());
                 SecurityContext securityContext = SecurityContextHolder.getContext();
                 securityContext.setAuthentication(
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities())
@@ -64,31 +46,18 @@ public class OAuth2Controller {
                 return new ModelAndView("redirect:/meals");
             } catch (UsernameNotFoundException e) {
 
-                attr.addFlashAttribute("userTo", new UserTo(githubUserDetails.getName(), githubUserDetails.getEmail()));
+                attr.addFlashAttribute("userTo", user);
                 return new ModelAndView("redirect:/register");
             }
         }
-
         return new ModelAndView("login");
     }
 
-    private GithubUserDetails getGithubUserDetails(String accessToken) {
-        UriComponentsBuilder builder = fromHttpUrl(source.getLoginUrl()).queryParam("access_token", accessToken);
-        ResponseEntity<JsonNode> responseEntity = template.getForEntity(builder.build().encode().toUri(), JsonNode.class);
-        JsonNode user = responseEntity.getBody();
-        String login = user.get("login").asText();
-        String name = user.get("name").asText();
-        if (name.equals("null")) {
-            name = login;
-        }
-        String email = user.get("email").asText();
-        if (email.equals("null")) {
-            throw new NotFoundException("No email found in Github account");
-        }
-        return new GithubUserDetails(login, name, email);
-    }
+    protected abstract UserTo getUserDetails(String accessToken);
 
-    private String getAccessToken(String code) {
+    protected abstract String getAccessToken(String code);
+
+    protected String getAccessTokenFromOAuth2Source(String code, OAuth2Source source) {
         UriComponentsBuilder builder = fromHttpUrl(source.getAccessTokenUrl())
                 .queryParam("client_id", source.getClientId())
                 .queryParam("client_secret", source.getClientSecret())
