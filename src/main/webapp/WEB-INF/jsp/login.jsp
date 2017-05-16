@@ -32,7 +32,6 @@
 
 <div class="jumbotron">
     <div class="container">
-        <br/>
         <div class="row">
             <c:if test="${param.error}">
                 <br/>
@@ -41,19 +40,18 @@
                 </div>
             </c:if>
             <c:if test="${not empty param.message}">
+                <br/>
                 <div class="message">
                     <spring:message code="${param.message}"/>
                 </div>
             </c:if>
         </div>
+        <br/>
         <div class="row">
             <div class="col-md-2">
                 <a class="btn btn-lg btn-success" href="register"><spring:message code="app.register"/></a>
             </div>
-            <div class="col-md-8">
-                <a href="oauth2/github/authorize" role="button" class="btn btn-lg btn-info">
-                    <spring:message code="app.login.github"/>
-                </a>
+            <div class="col-md-6">
                 <button type="submit" class="btn btn-lg btn-primary"
                         onclick="setCredentials('user@yandex.ru', 'password')">
                     <spring:message code="app.login.as"/> User
@@ -62,6 +60,15 @@
                         onclick="setCredentials('admin@gmail.com', 'admin')">
                     <spring:message code="app.login.as"/> Admin
                 </button>
+            </div>
+            <div class="col-md-4">
+                <spring:message code="app.login.with"/>
+                <a href="oauth2/github/authorize" role="button" class="btn btn-lg btn-info">
+                    Github
+                </a>
+                <a href="oauth2/facebook/authorize" role="button" class="btn btn-lg btn-info">
+                    Facebook
+                </a>
             </div>
         </div>
         <br/>
