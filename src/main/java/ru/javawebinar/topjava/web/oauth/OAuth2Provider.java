@@ -1,6 +1,6 @@
 package ru.javawebinar.topjava.web.oauth;
 
-public class OAuth2Source {
+public class OAuth2Provider {
 
     private String authorizeUrl;
     private String accessTokenUrl;

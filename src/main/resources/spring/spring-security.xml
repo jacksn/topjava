@@ -46,7 +46,7 @@
                 p:location="classpath:spring/security/facebook.properties"
                 p:placeholderPrefix="${facebook."/>
 
-    <beans:bean id="githubOAuth2Source" class="ru.javawebinar.topjava.web.oauth.OAuth2Source"
+    <beans:bean id="githubOAuth2Provider" class="ru.javawebinar.topjava.web.oauth.OAuth2Provider"
                 p:accessTokenUrl="${github.accessTokenUrl}"
                 p:authorizeUrl="${github.authorizeUrl}"
                 p:userInfoUrl="${github.userInfoURL}"
@@ -55,7 +55,7 @@
                 p:clientId="${github.clientId}"
                 p:clientSecret="${github.clientSecret}"/>
 
-    <beans:bean id="facebookOAuth2Source" class="ru.javawebinar.topjava.web.oauth.OAuth2Source"
+    <beans:bean id="facebookOAuth2Provider" class="ru.javawebinar.topjava.web.oauth.OAuth2Provider"
                 p:accessTokenUrl="${facebook.accessTokenUrl}"
                 p:authorizeUrl="${facebook.authorizeUrl}"
                 p:userInfoUrl="${facebook.userInfoURL}"

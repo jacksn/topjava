@@ -6,7 +6,7 @@ public class Profiles {
             HSQLDB = "db-hsqldb",
             HEROKU = "db-heroku",
 
-    JDBC = "repo-jdbc",
+            JDBC = "repo-jdbc",
             JPA = "repo-jpa",
             DATAJPA = "repo-datajpa";
 

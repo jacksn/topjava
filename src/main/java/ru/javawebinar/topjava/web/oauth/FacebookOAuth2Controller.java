@@ -17,22 +17,22 @@ import static org.springframework.web.util.UriComponentsBuilder.fromHttpUrl;
 public class FacebookOAuth2Controller extends AbstractOAuth2Controller {
 
     @Autowired
-    @Qualifier("facebookOAuth2Source")
-    private OAuth2Source source;
+    @Qualifier("facebookOAuth2Provider")
+    private OAuth2Provider provider;
 
     @GetMapping("/authorize")
     public String authorize() {
-        return "redirect:" + source.getAuthorizeUrl()
-                + "?client_id=" + source.getClientId()
+        return "redirect:" + provider.getAuthorizeUrl()
+                + "?client_id=" + provider.getClientId()
                 + "&scope=public_profile,email"
-                + "&client_secret=" + source.getClientSecret()
-                + "&redirect_uri=" + source.getRedirectUri()
-                + "&state=" + source.getCode();
+                + "&client_secret=" + provider.getClientSecret()
+                + "&redirect_uri=" + provider.getRedirectUri()
+                + "&state=" + provider.getCode();
     }
 
     @Override
     protected UserTo getUserDetails(String accessToken) {
-        UriComponentsBuilder builder = fromHttpUrl(source.getUserInfoUrl())
+        UriComponentsBuilder builder = fromHttpUrl(provider.getUserInfoUrl())
                 .queryParam("access_token", accessToken)
                 .queryParam("fields", "name,email");
         ResponseEntity<JsonNode> responseEntity = template.getForEntity(builder.build().encode().toUri(), JsonNode.class);
@@ -43,6 +43,6 @@ public class FacebookOAuth2Controller extends AbstractOAuth2Controller {
     }
 
     protected String getAccessToken(String code) {
-        return super.getAccessTokenFromOAuth2Source(code, source);
+        return super.getAccessTokenFromOAuth2Source(code, provider);
     }
 }

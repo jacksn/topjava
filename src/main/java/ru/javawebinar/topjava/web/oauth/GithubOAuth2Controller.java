@@ -18,21 +18,21 @@ import static org.springframework.web.util.UriComponentsBuilder.fromHttpUrl;
 public class GithubOAuth2Controller extends AbstractOAuth2Controller {
 
     @Autowired
-    @Qualifier("githubOAuth2Source")
-    private OAuth2Source source;
+    @Qualifier("githubOAuth2Provider")
+    private OAuth2Provider provider;
 
     @GetMapping("/authorize")
     public String authorize() {
-        return "redirect:" + source.getAuthorizeUrl()
-                + "?client_id=" + source.getClientId()
-                + "&client_secret=" + source.getClientSecret()
-                + "&redirect_uri=" + source.getRedirectUri()
-                + "&state=" + source.getCode();
+        return "redirect:" + provider.getAuthorizeUrl()
+                + "?client_id=" + provider.getClientId()
+                + "&client_secret=" + provider.getClientSecret()
+                + "&redirect_uri=" + provider.getRedirectUri()
+                + "&state=" + provider.getCode();
     }
 
     @Override
     protected UserTo getUserDetails(String accessToken) {
-        UriComponentsBuilder builder = fromHttpUrl(source.getUserInfoUrl()).queryParam("access_token", accessToken);
+        UriComponentsBuilder builder = fromHttpUrl(provider.getUserInfoUrl()).queryParam("access_token", accessToken);
         ResponseEntity<JsonNode> responseEntity = template.getForEntity(builder.build().encode().toUri(), JsonNode.class);
         JsonNode user = responseEntity.getBody();
         String login = user.get("login").asText();
@@ -48,6 +48,6 @@ public class GithubOAuth2Controller extends AbstractOAuth2Controller {
     }
 
     protected String getAccessToken(String code) {
-        return super.getAccessTokenFromOAuth2Source(code, source);
+        return super.getAccessTokenFromOAuth2Source(code, provider);
     }
 }

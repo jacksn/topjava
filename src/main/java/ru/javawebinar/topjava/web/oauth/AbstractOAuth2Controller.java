@@ -26,6 +26,7 @@ public abstract class AbstractOAuth2Controller {
 
     @Autowired
     protected RestTemplate template;
+
     @Autowired
     private UserDetailsService service;
 
@@ -57,7 +58,7 @@ public abstract class AbstractOAuth2Controller {
 
     protected abstract String getAccessToken(String code);
 
-    protected String getAccessTokenFromOAuth2Source(String code, OAuth2Source source) {
+    protected String getAccessTokenFromOAuth2Source(String code, OAuth2Provider source) {
         UriComponentsBuilder builder = fromHttpUrl(source.getAccessTokenUrl())
                 .queryParam("client_id", source.getClientId())
                 .queryParam("client_secret", source.getClientSecret())
