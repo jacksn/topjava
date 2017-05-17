@@ -37,13 +37,13 @@
 
     <beans:bean name="github-properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
                 p:ignoreUnresolvablePlaceholders="true"
-                p:location="classpath:spring/security/github.properties"
+                p:location="classpath:oauth/github.properties"
                 p:placeholderPrefix="${github."/>
 
     <beans:bean name="facebook-properties"
                 class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
                 p:ignoreUnresolvablePlaceholders="true"
-                p:location="classpath:spring/security/facebook.properties"
+                p:location="classpath:oauth/facebook.properties"
                 p:placeholderPrefix="${facebook."/>
 
     <beans:bean id="githubOAuth2Provider" class="ru.javawebinar.topjava.web.oauth.OAuth2Provider"
