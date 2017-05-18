@@ -61,9 +61,9 @@
                        (onRowSelect)="selectMeal($event)" [paginator]="true" rows="10" [responsive]="true">
 
             <p-column field="dateTime" [sortable]="true" header="{{'meals.dateTime' | i18nPipe}}">
-              <template let-meal="rowData" pTemplate type="body">
+              <ng-template let-meal="rowData" pTemplate type="body">
                 {{meal.dateTime | date:'y-MM-dd HH:mm'}}
-              </template>
+              </ng-template>
             </p-column>
 
             <p-column field="description" header="{{'meals.description' | i18nPipe}}" [filter]="true"
@@ -72,10 +72,10 @@
                       [sortable]="true"></p-column>
 
             <p-column [style]="{width : '120px'}">
-              <template let-meal="rowData" pTemplate type="body">
+              <ng-template let-meal="rowData" pTemplate type="body">
                 <button type="button" pButton (click)="deleteItem(meal)"
                         label="{{'common.delete' | i18nPipe}}"></button>
-              </template>
+              </ng-template>
             </p-column>
             <footer>
               <div class="ui-helper-clearfix" style="width:100%">

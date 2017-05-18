@@ -15,28 +15,28 @@
                               [filter]="true"></p-column>
                     <p-column field="enabled" [sortable]="true"
                               [style]="{'width':'100px','text-align': 'center','vertical-align': 'middle'}">
-                        <template pTemplate type="header">
+                      <ng-template pTemplate type="header">
                             {{'users.active' | i18nPipe}}
-                        </template>
-                        <template pTemplate type="body" let-user="rowData">
+                      </ng-template>
+                      <ng-template pTemplate type="body" let-user="rowData">
                             <input type="checkbox" [(ngModel)]="user.enabled" (click)="onChangeActiveStatus(user)">
-                        </template>
+                      </ng-template>
                     </p-column>
                     <p-column field="registered" [sortable]="true">
-                        <template pTemplate type="header">
+                      <ng-template pTemplate type="header">
                             {{'users.registered' | i18nPipe}}
-                        </template>
-                        <template pTemplate type="body" let-user="rowData">
+                      </ng-template>
+                      <ng-template pTemplate type="body" let-user="rowData">
                             {{user.registered | date:'y-MM-dd HH:mm'}}
-                        </template>
+                      </ng-template>
                     </p-column>
                     <p-column [style]="{'width':'120px'}">
-                        <template pTemplate type="header">
+                      <ng-template pTemplate type="header">
                             {{'common.delete' | i18nPipe}}
-                        </template>
-                        <template pTemplate type="body" let-user="rowData">
+                      </ng-template>
+                      <ng-template pTemplate type="body" let-user="rowData">
                             <button pButton (click)="onDelete(user)" label="{{'common.delete' | i18nPipe}}"></button>
-                        </template>
+                      </ng-template>
                     </p-column>
                     <footer>
                         <div class="ui-helper-clearfix" style="width:100%">
