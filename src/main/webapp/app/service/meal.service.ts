@@ -23,7 +23,7 @@ export class MealService {
     return this.http.delete(basePath + mealPath + '/' + meal.id, reqOptions);
   }
 
-  mapResponse(resp) {
+  mapResponse(resp: Response) {
     let mealsList: UserMeal[] = resp.json();
     mealsList.forEach((meal: UserMeal) => {
       meal.dateTime = this.dateTimeTransformer.deserializeDateTime(meal.dateTime);

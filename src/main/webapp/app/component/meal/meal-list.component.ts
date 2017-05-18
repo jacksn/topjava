@@ -73,7 +73,7 @@ export class MealListComponent implements OnInit {
     this.updateList();
   }
 
-  getRowClass(rowData: UserMeal, rowIndex): string {
+  getRowClass(rowData: UserMeal, rowIndex: number): string {
     return rowData.exceed ? "exceeded" : null;
   }
 }
