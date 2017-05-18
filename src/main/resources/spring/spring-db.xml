@@ -69,14 +69,11 @@
     <beans profile="db-heroku">
         <context:property-placeholder location="classpath:/db/heroku.properties" system-properties-mode="OVERRIDE"/>
 
-        <bean class="java.net.URI" id="dbUrl">
-            <constructor-arg value="${DATABASE_URL}"/>
-        </bean>
         <bean id="dataSource"
               class="org.apache.tomcat.jdbc.pool.DataSource"
-              p:url="#{ 'jdbc:postgresql://' + @dbUrl.getHost() + @dbUrl.getPath() }"
-              p:username="#{ @dbUrl.getUserInfo().split(':')[0] }"
-              p:password="#{ @dbUrl.getUserInfo().split(':')[1] }"
+              p:url="${database.url}"
+              p:username="${database.username}"
+              p:password="${database.password}"
               p:driverClassName="org.postgresql.Driver"
               p:validationQuery="SELECT 1"
               p:maxActive="10"
