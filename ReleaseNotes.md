@@ -1,5 +1,17 @@
 # TopJava Release Notes
-
+### Topjava 10
+- добавил
+  - [логирование от Postgres Driver](http://stackoverflow.com/a/43242620/548473)
+  - в `.travis.yml` [сборку только ветки master](https://docs.travis-ci.com/user/customizing-the-build#Building-Specific-Branches)
+- рефакторинг
+  - сделал выбор в сервлете через switch
+  - [все логгирование сделал через {} форматирование](http://stackoverflow.com/questions/10555409/logger-slf4j-advantages-of-formatting-with-instead-of-string-concatenation) и поправил его в контроллерах (поле проверки id)
+  - [перешел на конструктор DI](http://stackoverflow.com/questions/39890849/what-exactly-is-field-injection-and-how-to-avoid-it)
+  - в `ModelMatcher` переименовал `Comparator` -> `Equality`
+  - [заинлайнил все лямбды](http://stackoverflow.com/questions/19718353/is-repeatedly-instantiating-an-anonymous-class-wasteful) (компараторы, ModelMatcher.equality)
+- удалил зависимость `javax.transaction.jta` (уже не нужна)
+- удалил в `pom.xml` зависимостях  `${spring.version}` (уже есть в `spring-framework-bom`)
+  
 ### Topjava 9
 - добавил
   - выбор профиля базы через `ActiveProfilesResolver`/`AllActiveProfileResolver` на основе драйвера базы в classpath
@@ -16,7 +28,8 @@
   - обновил jQuery до 3.x, исключил из зависимостей webjars ненужные jQuery
   - cделал <a href="http://stackoverflow.com/questions/436411/where-should-i-put-script-tags-in-html-markup/24070373#24070373">загрузку скриптов асинхронной</a>
   - фильтр еды сделал в [Bootstrap Panels](http://getbootstrap.com/components/#panels)
-  - кнопку сброса фильтра, очистку полей формы через `reset()`
+  - вместо `Persistable` ввел интерфейс `HasId` и наследую от него как Entity, так и TO
+  - сделал универсальную обработку исключений дублирования email и dateTime
 
 ### Topjava 8
 - добавил:
