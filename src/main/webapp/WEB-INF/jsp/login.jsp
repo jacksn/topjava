@@ -51,7 +51,7 @@
             <div class="col-md-2">
                 <a class="btn btn-lg btn-success" href="register"><spring:message code="app.register"/></a>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <button type="submit" class="btn btn-lg btn-primary"
                         onclick="setCredentials('user@yandex.ru', 'password')">
                     <spring:message code="app.login.as"/> User
@@ -61,13 +61,16 @@
                     <spring:message code="app.login.as"/> Admin
                 </button>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <spring:message code="app.login.with"/>
                 <a href="oauth2/github/authorize" role="button" class="btn btn-lg btn-info">
                     Github
                 </a>
                 <a href="oauth2/facebook/authorize" role="button" class="btn btn-lg btn-info">
                     Facebook
+                </a>
+                <a href="oauth2/google/authorize" role="button" class="btn btn-lg btn-info">
+                    Google
                 </a>
             </div>
         </div>
