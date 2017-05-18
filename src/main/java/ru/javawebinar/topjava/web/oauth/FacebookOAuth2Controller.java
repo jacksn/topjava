@@ -43,6 +43,6 @@ public class FacebookOAuth2Controller extends AbstractOAuth2Controller {
     }
 
     protected String getAccessToken(String code) {
-        return super.getAccessTokenFromOAuth2Source(code, provider);
+        return super.getAccessTokenFromOAuth2Provider(code, provider);
     }
 }

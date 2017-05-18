@@ -58,12 +58,12 @@ public abstract class AbstractOAuth2Controller {
 
     protected abstract String getAccessToken(String code);
 
-    protected String getAccessTokenFromOAuth2Source(String code, OAuth2Provider source) {
-        UriComponentsBuilder builder = fromHttpUrl(source.getAccessTokenUrl())
-                .queryParam("client_id", source.getClientId())
-                .queryParam("client_secret", source.getClientSecret())
+    protected String getAccessTokenFromOAuth2Provider(String code, OAuth2Provider provider) {
+        UriComponentsBuilder builder = fromHttpUrl(provider.getAccessTokenUrl())
+                .queryParam("client_id", provider.getClientId())
+                .queryParam("client_secret", provider.getClientSecret())
                 .queryParam("code", code)
-                .queryParam("redirect_uri", source.getRedirectUri());
+                .queryParam("redirect_uri", provider.getRedirectUri());
         ResponseEntity<JsonNode> tokenEntity = template.postForEntity(builder.build().encode().toUri(), null, JsonNode.class);
         return tokenEntity.getBody().get("access_token").asText();
     }
