@@ -25,7 +25,6 @@ public class GithubOAuth2Controller extends AbstractOAuth2Controller {
     public String authorize() {
         return "redirect:" + provider.getAuthorizeUrl()
                 + "?client_id=" + provider.getClientId()
-                + "&client_secret=" + provider.getClientSecret()
                 + "&redirect_uri=" + provider.getRedirectUri()
                 + "&state=" + provider.getCode();
     }

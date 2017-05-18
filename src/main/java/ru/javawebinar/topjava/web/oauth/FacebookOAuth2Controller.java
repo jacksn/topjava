@@ -25,7 +25,6 @@ public class FacebookOAuth2Controller extends AbstractOAuth2Controller {
         return "redirect:" + provider.getAuthorizeUrl()
                 + "?client_id=" + provider.getClientId()
                 + "&scope=public_profile,email"
-                + "&client_secret=" + provider.getClientSecret()
                 + "&redirect_uri=" + provider.getRedirectUri()
                 + "&state=" + provider.getCode();
     }
