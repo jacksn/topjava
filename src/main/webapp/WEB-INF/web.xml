@@ -7,7 +7,7 @@
 
     <context-param>
         <param-name>spring.profiles.default</param-name>
-        <param-value>db-postgres,repo-datajpa</param-value>
+        <param-value>db-heroku,repo-datajpa</param-value>
     </context-param>
 
     <context-param>
